@@ -1,0 +1,27 @@
+<script>
+    //Problema: Contagem Regressiva
+    /* 
+    Criar uma função contagemRegressiva(numero) que exibe uma contagem regressiva a partir do número, que será informado pelo usuário.
+    */
+   function contagemRegressiva(numero){
+        let regressao = [];
+        if(numero>=0){
+            for(let i = numero; i>=0; i--){
+            regressao.push(i)
+        }
+        return regressao;
+        } else{
+            for(let i = numero; i<=0; i++){
+            regressao.push(i)
+        }
+        return regressao;
+        }
+        
+   }
+   let numero = parseInt(prompt(`Informe um número:`));
+   let resultado = contagemRegressiva(numero);
+
+   document.write(`Contagem regressiva: ${resultado.join(", ")}`);
+
+    
+</script>
