@@ -1,5 +1,4 @@
 <script>
-    let listaCompras = ["Arroz", "Feijão", "Leite"];
     //Problema: Lista de Compras
     /*
     1. Criar uma função adicionarItem(item) que adiciona um novo item à lista.
@@ -7,6 +6,60 @@
     3. Criar uma função listarItens() que exibe todos os itens da lista.
     4. Criar um loop(while) para permitir ao usuário interagir com as opções até escolher sair.
     */
-    
-    
+    let listaCompras = ["Arroz", "Feijão", "Leite"];
+    let opcao = "";
+    while (opcao !== "sair") {
+        alert(`1 - Digite "adicionar" ou "add" para adicionar um item a lista de compras:
+    2 - Digite "remover" para remover um item:
+    3 - Digite "visualizar" ou "visu" para visualizar itens no carrinho:
+    4 - Digite "sair" para encerrar programa:`);
+        opcao = prompt(`Informe onde gostaria de continuar o programa:`).toLowerCase();
+        if (opcao === "adicionar" || opcao === "add") {
+            function adicionarItem(item) {
+                listaCompras.push(item);
+                return listaCompras;
+            }
+            let item = prompt(`Que item deseja adicionar ao carrinho:`);
+            let resultado = adicionarItem(item);
+            alert(`Item adicionado ao carrinho!`);
+
+        } else if (opcao === "remover") {
+            function removerItem(item) {
+                let posicaoItem = listaCompras.indexOf(item);
+                if (posicaoItem !== -1) {
+                    listaCompras.splice(posicaoItem, 1);
+                    alert(`Item removido do carrinho!`);
+                    return listaCompras;
+                } else {
+                    alert(`Não existe esse alimento na sua lista de compras!`);
+                }
+                
+            }
+            let item = prompt(`Que item deseja remover do carrinho:`);
+            let maiusculo = item.charAt(0).toUpperCase() + item.slice(1);
+            let resultado = removerItem(maiusculo);
+
+        } else if (opcao === "visualizar" || opcao === "visu") {
+            function listarItens() {
+                return `Seu carrinho:
+                \n${listaCompras.join("\n")}`;
+            }
+            let resultado = listarItens();
+            alert(resultado);
+        } else if (opcao !== "sair" && opcao !== "visualizar" && opcao !== "remover" && opcao !== "add") {
+            alert(`Opção Inválida, tente novamente!`);
+        }
+    }
+    alert(`Carrinho Finalizado com Sucesso!`);
+    document.write(`Seu carrinho:<br> ${listaCompras.join("<br>")}`);
+
+
+
+
+
+
+
+
+
+
 </script>
