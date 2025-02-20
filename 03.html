@@ -11,7 +11,7 @@
     4. Criar um menu interativo para buscar alunos, adicionar notas e verificar médias.
     */
 
-    let opcao = -1
+    let opcao = -1;
     while (opcao !== 4) {
         alert(`1. Buscar aluno:
         2. Adicionar notas;
@@ -21,19 +21,23 @@
         while (isNaN(opcao)) {
             opcao = Number(prompt(`Informe qual opção deseja prosseguir: Obs: Apenas o número que corresponde a opção é permitido!`));
         }
-
+        if(opcao === 4){
+            alert(`Volte sempre! encerrando programa!`);
+            break;
+        }
         let alunoInfo = prompt(`Informe o nome do aluno:`).toLowerCase();
         let aluno = alunoInfo.charAt(0).toUpperCase() + alunoInfo.slice(1);
         let nome;
 
         if (aluno == "Ana") {
-            nome = alunos[0]//.notas
+            nome = alunos[0]//.notas;
         } else if (aluno == "Carlos") {
-            nome = alunos[1]//.notas
+            nome = alunos[1]//.notas;
         } else if (aluno == "Bruna") {
-            nome = alunos[2]//.notas
+            nome = alunos[2]//.notas;
         } else {
             alert(`Nome inválido, tente novamente!`);
+            continue;
         }
 
         if (opcao === 1) {
@@ -44,67 +48,51 @@
             let resultado = buscarAluno(nome);
             alert(resultado);
         } else if (opcao === 2) {
-                let nota = Number(prompt(`Informe qual nota deseja adicionar:`))
-                while(isNaN(nota) || nota<0){
-                    alert(`Valor Inválido!`)
-                    nota = Number(prompt(`Informe qual nota deseja adicionar:`))
-                }
+            let nota = Number(prompt(`Informe qual nota deseja adicionar:`));
+            while (isNaN(nota) || nota < 0) {
+                alert(`Valor Inválido!`);
+                nota = Number(prompt(`Informe qual nota deseja adicionar:`));
+            }
             if (nota >= 0) {
                 function adicionarNota(nome, nota) {
-                    nome.notas.push(nota)
-                    return nome.notas
+                    nome.notas.push(nota);
+                    return nome.notas;
                 }
                 let resultado = adicionarNota(nome, nota);
-                alert(resultado)
-                // let visu = prompt(`Gostaria de visualizar a nota: SIM ou NÃO.`).toUpperCase()
-                // while(visu !== "SIM" && visu !== "NÃO"){
-                //     alert(`É Sim ou Não!`)
-                //     visu = prompt(`Gostaria de visualizar a nota: SIM ou NÃO.`).toUpperCase()
-                // }
-                // if(visu === "SIM"){
-                //     //continuar
-                // } else(visu === "NÃO"){
-                //     //continuar
-                // }
+                alert(resultado);
+
 
             }
 
-        }else if(opcao === 3){
-            alert(`A média do(a) ${nome.nome} é ${resultado}. Ou seja, ${resultado2}`);
+        } else if (opcao === 3) {
+            function calcularMedia(media) {
+                let soma = 0;
+                media = media.notas;
+                for (let nota of media) {
+                    soma += nota;
+                }
+                return soma / media.length;
+            }
+
+            let resultado1 = calcularMedia(nome);
+
+
+            function classificarAluno(nome) {
+                if (nome >= 7) {
+                    return `A/O ${aluno} foi aprovada(o).`;
+                } else if (nome >= 5 && nome <= 6.9) {
+                    return `A/O ${aluno} está de recuperação. `;
+                } else {
+                    return `A/O ${aluno} está reprovada(o).`;
+                }
+            }
+            let resultado2 = classificarAluno(resultado1);
+            alert(`A média do(a) ${nome.nome} é ${resultado1}. Ou seja, ${resultado2}`);
 
         }
     }
 
 
-    
-
-    
-    function calcularMedia(nome) {
-        let soma = 0;
-        nome = nome.notas
-        for (let nota of nome) {
-            soma += nota
-        }
-        return soma / nome.length;
-    }
-    
-    let resultado = calcularMedia(nome);
-
-
-    function classificarAluno(nome) {
-        if (nome >= 7) {
-            return `A/O ${aluno} foi aprovada(o).`;
-        } else if (nome >= 5 && nome <= 6.9) {
-            return `A/O ${aluno} está de recuperação. `;
-        } else {
-            return `A/O ${aluno} está reprovada(o).`;
-        }
-    }
-    let resultado2 = classificarAluno(resultado);
-    
-    
-
-    
 
 
 
@@ -129,7 +117,15 @@
 
 
 
-    
+
+
+
+
+
+
+
+
+
 
 
 

@@ -12,6 +12,114 @@
     4. Criar uma função calcularFaturamento() que soma o valor de todas as reservas feitas.
     5. Criar um loop (while) para o usuário interagir com as opções até escolher sair (opção 0).
     */
+    let opcao = -1;
+    while (opcao !== 0) {
+        alert(`Opções:
+        1. Listar quartos disponíveis:
+        2. Reserva de quarto
+        3. Cancelar reserva:
+        4. Soma das reservas:
+        0. Encerrar programa:`);
+        opcao = Number(prompt(`Informe como deseja prosseguir: Obs: Apenas o número da opção é permitido!`));
+        while (isNaN(opcao) || opcao > 4 || opcao < 0) {
+            opcao = Number(prompt(`Informe como deseja prosseguir: Obs: Apenas o número da opção é permitido!`));
+        }
 
-    
+        if(opcao === 0){
+            alert(`Fechando programa, volte sempre!`);
+            break;
+        }
+        if (opcao === 1) {
+            alert(`Quartos vagos: ${listarQuartosDisponiveis()}`);
+        } else if (opcao === 2) {
+            let numeroQuarto = solicitarNumeroQuarto();
+            
+            let quartoSelecionado = quartos.find(q => q.numero === numeroQuarto);
+
+            //Função 2
+            if (quartoSelecionado) {
+                let resultado = reservarQuarto(quartoSelecionado);
+                alert(resultado);
+            } else {
+                alert("Erro: Quarto não encontrado!");
+            }
+        } else if (opcao === 3) {
+            let numeroQuarto = solicitarNumeroQuarto();
+            let quartoSelecionado = quartos.find(q => q.numero === numeroQuarto);
+            if (quartoSelecionado) {
+                let resultado = cancelarReserva(quartoSelecionado);
+                alert(resultado);
+            } else {
+                alert("Erro: Quarto não encontrado!");
+            }
+        } else {
+            alert(`O valor de todas as reservas feitas é R$${calcularFaturamento().toFixed(2).replace(".", ",")}`);
+        }
+    }
+
+
+
+    //Função 1
+    function listarQuartosDisponiveis() {
+        let quartosVagos = [];
+        for (let i = 0; i <= quartos.length - 1; i++) {
+            if (quartos[i].disponivel === true) {
+                quartosVagos.push(quartos[i].numero);
+            }
+        }
+        if (quartosVagos.length === 0) {
+            return `Nenhum quarto disponível`;
+        } else {
+            return quartosVagos;
+        }
+
+    }
+
+    //Função 2
+    function reservarQuarto(quartos) {
+        if (quartos.disponivel) {
+            quartos.disponivel = false;
+            return `Quarto ${quartos.numero} reservado!`;
+        } else {
+            return `Quarto não disponível!`;
+        }
+
+    }
+    //Função 3
+    function cancelarReserva(numero) {
+        if (!numero.disponivel) {
+            numero.disponivel = true;
+            return `Quarto ${numero.numero} está vago agora!`;
+        } else {
+            return `Quarto ${numero.numero} já estava vago!`;
+        }
+    }
+    //Função 4
+    function calcularFaturamento(){
+        let soma = 0;
+        for(let i = 0; i<=quartos.length-1; i++){
+            if(!quartos[i].disponivel){
+                soma+=quartos[i].preco;
+            }
+            
+        }
+        return soma;
+    }
+
+    //Função 5 (n obrigatótoria)
+    function solicitarNumeroQuarto(){
+        let numero = Number(prompt(`Informe o número do quarto que deseja reservar:`));
+            while ((numero !== 101 && numero !== 102 && numero !== 103) || isNaN(numero)) {
+                numero = Number(prompt(`Informe o número do quarto que deseja reservar:`));
+            }
+            return numero;
+    }
+
+
+
+
+
+
+
+
 </script>

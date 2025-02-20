@@ -33,23 +33,23 @@
         alert(`1. calcular média das temperaturas:
     2. Encontrar a temperatura mais quente:
     3. Encontrar a temperatura mais fria:
-    0. Sair:`)
+    0. Sair:`);
         opcao = Number(prompt(`Informe qual opção deseja prosseguir: 
         OBS: Informe apenas o número que corresponde cada opção!`));
         if (opcao === 1) {
-            alert(`A média das temperaturas registradas é ${calcularMedia(temperaturas).toFixed(1)}°C.`)
+            alert(`A média das temperaturas registradas é ${calcularMedia(temperaturas).toFixed(1)}°C.`);
         }
         else if (opcao === 2) {
-            alert(`A temperatura mais quente foi registrada como ${encontrarMaisQuente(temperaturas).toFixed(1)}ºC.`)
+            alert(`A temperatura mais quente foi registrada como ${encontrarMaisQuente(temperaturas).toFixed(1)}ºC.`);
         }
         else if (opcao === 3) {
-            alert(`A temperatura mais fria foi registrada como ${encontrarMaisFria(temperaturas).toFixed(1)}ºC.`)
+            alert(`A temperatura mais fria foi registrada como ${encontrarMaisFria(temperaturas).toFixed(1)}ºC.`);
         }
         else if (opcao !== 1 && opcao !== 2 && opcao !== 3 && opcao !== 0) {
-            alert(`Opção Inválida, tente novamente!`)
+            alert(`Opção Inválida, tente novamente!`);
         }
     }
-    alert(`Adeus! Volte sempre!`)
+    alert(`Adeus! Volte sempre!`);
 
 
 

@@ -14,5 +14,116 @@
     5. Criar um menu (switch case) para o usuário escolher ações repetidamente (entre as funções desenvolvidas) até decidir sair (opção para sair - 0).
     */
 
+    let opcao = -1;
+    while (opcao !== 0) {
+        alert(`Opções:
+        1. Buscar produtos:
+        2. Adicionar ao estoque:
+        3. Vender produto:
+        4. Valor total em estoque:
+        0. Encerrar programa!`);
+
+        opcao = Number(prompt(`Informe o número da opção desejada:`));
+        while (isNaN(opcao) || opcao > 4 || opcao < 0) {
+            opcao = Number(prompt(`Informe o número da opção desejada:`));
+        }
+
+        switch (opcao) {
+            case 0:
+                alert(`Encerrando programa... Volte sempre!`);
+                break;
+            case 1:
+                let nome = prompt(`Informe um produto:`);
+                let produto = nome.charAt(0).toUpperCase() + nome.slice(1);
+                alert(buscarProduto(produto));
+                break;
+            case 2:
+                alert(`id: 1 = Caderno
+    id: 2 = Caneta
+    id: 3 = Mochila`);
+                let id = Number(prompt(`Informe o id do produto que deseja adicionar mais estoque:`));
+                while (isNaN(id) || id > 3 || id < 0) {
+                    alert(`Id não encontrado, tente novamente!`);
+                    id = Number(prompt(`Informe o id do produto que deseja adicionar mais estoque:`));
+                }
+                let qtd = Number(prompt(`Informe também, a quantidade que deseja adicionar em estoque:`));
+                while (isNaN(qtd)) {
+                    qtd = Number(prompt(`Informe também, a quantidade que deseja adicionar em estoque:`));
+                }
+                alert(adicionarEstoque(id, qtd));
+                break;
+            case 3:
+                alert(`id: 1 = Caderno
+    id: 2 = Caneta
+    id: 3 = Mochila`);
+                let idVen = Number(prompt(`Informe o id do produto que deseja vender:`));
+                while (isNaN(idVen) || idVen > 3 || idVen < 0) {
+                    idVen = Number(prompt(`Informe o id do produto que deseja vender:`));
+                }
+                let qtdVen = Number(prompt(`Informe também, a quantidade que deseja vender:`));
+                while (isNaN(qtdVen)) {
+                    qtdVen = Number(prompt(`Informe também, a quantidade que deseja vender:`));
+                }
+                alert(venderProduto(idVen, qtdVen));
+                break;
+            case 4:
+                alert(`O valor total dos produtos em estoque é de R$${calcularValorTotalEstoque().toFixed(2).replace(".", ",")}`);
+                break;
+            
+        }
+    }
+
+    function buscarProduto(nome) {
+        for (let i = 0; i <= estoque.length - 1; i++) {
+            if (estoque[i].nome === nome) {
+                return `Id do produto: ${estoque[i].id}, há ${estoque[i].quantidade} unidades de ${nome}, a R$${estoque[i].preco.toFixed(2).replace(".", ",")} cada uma.`;
+            }
+        }
+        return `Produto não encontrado!`;
+    }
+
+
+    function adicionarEstoque(id, qtd) {
+        for (let i = 0; i <= estoque.length - 1; i++) {
+            if (id === estoque[i].id) {
+                return `Quantidade do(a) ${estoque[i].nome} foi aumentado para ${estoque[i].quantidade += qtd}`;
+            }
+        }
+
+    }
+
+    function venderProduto(idVen, qtdVen) {
+        for (let i = 0; i <= estoque.length - 1; i++) {
+            if (idVen === estoque[i].id) {
+                if (qtdVen > estoque[i].quantidade) {
+                    return `Você está tentando vender uma quantidade superior ao quanto você tem em estoque! Ação falhou!`;
+                } else {
+                    return `O estoque de ${estoque[i].nome}s está em ${estoque[i].quantidade -= qtdVen}`;
+                }
+            }
+        }
+    }
+
+    function calcularValorTotalEstoque(){
+        let qtdProdutos = 0;
+        let multiplicacao = 0;
+        for(let i = 0; i<=estoque.length-1; i++){
+            multiplicacao = estoque[i].quantidade*estoque[i].preco;
+            qtdProdutos+=multiplicacao;
+        }
+        return qtdProdutos;
+    }
+    let resultado = calcularValorTotalEstoque();
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
